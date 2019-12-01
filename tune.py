@@ -1,5 +1,4 @@
 from ray import tune
-from ray.tune.logger import CSVLogger
 from argparse import ArgumentParser
 from pytorch_lightning import Trainer
 
@@ -25,8 +24,7 @@ analysis = tune.run(
         "lr": 0.001,
         "batch_size": 32,
         "hidden": tune.grid_search([2, 4, 6, 8, 10])
-    },
-    loggers=[CSVLogger]   
+    },   
 )
 
 print("Best config: ", analysis.get_best_config(metric="accuracy"))
